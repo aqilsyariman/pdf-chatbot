@@ -52,6 +52,10 @@ def search(question, collection):
         query_embeddings=[question_vector.tolist()],
         n_results=3
     )
+    
+    if results['distances'][0][0] > 1.5:
+        return None
+        
     return results
 
 def get_answer(question, results):
@@ -72,9 +76,12 @@ if result:
     print(f"Vector shape: {vectors.shape}")
     collection = store_vectors(chunks, vectors.tolist())
     print("Stored in ChromaDB!!")
-    results = search("What is ICMP?", collection)
+    question = input("Ask a question about your PDF: ")
+    results = search(question, collection)
     print(results)
-    final_answer = get_answer("What is ICMP?", results)
-    print(final_answer)
-
+    if results is None:
+        print("Sorry, I cannot find relevant information in this PDF")
+    else:
+        final_answer = get_answer(question, results)
+        print(final_answer)
     
