@@ -1,10 +1,10 @@
-# PDF Question Answering Chatbot
+# RAG Assistant
 
 A RAG (Retrieval-Augmented Generation) system that allows you to ask questions about any PDF document and get accurate AI-powered answers — with built-in hallucination prevention.
 
 ## What It Does
 
-Place any PDF file in the project folder and ask questions about its content. The system reads the document, understands the meaning of each section, and returns precise answers based only on the information inside the PDF.
+Place any PDF file in the `data/` folder and ask questions about its content. The system reads the document, understands the meaning of each section, and returns precise answers based only on the information inside the PDF.
 
 If you ask something unrelated to the PDF, the system will tell you it cannot find relevant information — instead of making up an answer.
 
@@ -53,8 +53,8 @@ PDF → Validate → Read all pages → Split into chunks → Convert to vectors
 
 ### Step 1 — Clone the repository
 ```bash
-git clone https://github.com/aqilsyariman/pdf-chatbot.git
-cd pdf-chatbot
+git clone https://github.com/aqilsyariman/rag-assistant.git
+cd rag-assistant
 ```
 
 ### Step 2 — Install dependencies
@@ -73,9 +73,9 @@ export GROQ_API_KEY="your-api-key-here"
 ```
 
 ### Step 5 — Add your PDF
-Place your PDF file in the project folder and update this line in `app.py`:
+Place your PDF file inside the `data/` folder and update this line in `app.py`:
 ```python
-result = validate_files(["your-file.pdf"])
+result = validate_files(["data/your-file.pdf"])
 ```
 
 ### Step 6 — Run
@@ -96,13 +96,15 @@ Ask a question about your PDF: your question here
 - Semantic search — finds answers by meaning, not just keywords
 - Hallucination prevention — rejects questions not related to the PDF
 - Free to run — uses Groq free tier
+- No credit card required
 
 ## Project Structure
 
 ```
 rag-assistant/
 │
-├── app.py       # Main application
+├── data/            # Place your PDF files here
+├── app.py           # Main application
 └── README.md        # Documentation
 ```
 
