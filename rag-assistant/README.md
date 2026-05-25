@@ -73,7 +73,7 @@ export GROQ_API_KEY="your-api-key-here"
 ```
 
 ### Step 5 — Add your PDF
-Place your PDF file in the project folder and update this line in `chatbot.py`:
+Place your PDF file in the project folder and update this line in `app.py`:
 ```python
 result = validate_files(["your-file.pdf"])
 ```
