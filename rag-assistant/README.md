@@ -80,7 +80,7 @@ result = validate_files(["your-file.pdf"])
 
 ### Step 6 — Run
 ```bash
-python3 chatbot.py
+python3 app.py
 ```
 
 ### Step 7 — Ask anything
@@ -100,9 +100,9 @@ Ask a question about your PDF: your question here
 ## Project Structure
 
 ```
-pdf-chatbot/
+rag-assistant/
 │
-├── chatbot.py       # Main application
+├── app.py       # Main application
 └── README.md        # Documentation
 ```
 
