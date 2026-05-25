@@ -1,4 +1,5 @@
 import PyPDF2
+import chromadb
 from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -28,13 +29,31 @@ def split_text(text):
 def embed_chunks(chunks):
     vectors = model.encode(chunks)
     return vectors
+
+def store_vectors(chunks, vectors):
+    client = chromadb.Client()
+    collection = client.create_collection("pdf_chunks")
+    
+    ids = []
+    for i in range (len(chunks)):
+        ids.append(str(i))
+        
+
+    collection.add(
+        embeddings=vectors,
+        documents=chunks,
+        ids=ids
+    )
+
+
 # ALL calls at bottom
 result = validate_files(["L1 IP (added subnet route).pdf"])
-
 if result:
     text = read_pdf(result[0])
     chunks = split_text(text)
     vectors = embed_chunks(chunks)
     print(f"Vector shape: {vectors.shape}")
+    store_vectors(chunks, vectors.tolist())
+    print("Stored in ChromaDB!!")
 
     
