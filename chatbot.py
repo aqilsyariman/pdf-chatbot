@@ -1,6 +1,7 @@
 import PyPDF2
 import chromadb
 from sentence_transformers import SentenceTransformer
+from langchain_groq import ChatGroq
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 # ALL functions at top
@@ -53,6 +54,15 @@ def search(question, collection):
     )
     return results
 
+def get_answer(question, results):
+    llm = ChatGroq(model="llama-3.1-8b-instant")
+    context = "".join(results['documents'][0])
+    prompt = f"Based on this information: {context} Answer this question: {question}"
+    answer = llm.invoke(prompt)
+    return answer.content
+
+    
+
 # ALL calls at bottom
 result = validate_files(["L1 IP (added subnet route).pdf"])
 if result:
@@ -64,5 +74,7 @@ if result:
     print("Stored in ChromaDB!!")
     results = search("What is ICMP?", collection)
     print(results)
+    final_answer = get_answer("What is ICMP?", results)
+    print(final_answer)
 
     
