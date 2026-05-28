@@ -1,8 +1,11 @@
+import os
 import PyPDF2
 import chromadb
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 
+load_dotenv()
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def validate_files(files):
@@ -55,6 +58,7 @@ def search(question, collection):
     return results
 
 def get_answer(question, results):
+    api_key = os.getenv("GROQ_API_KEY")
     llm = ChatGroq(model="llama-3.1-8b-instant")
     context = " ".join(results['documents'][0])
     prompt = f"Based on this information: {context} Answer this question: {question}"
