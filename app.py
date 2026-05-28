@@ -5,8 +5,11 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-
+import streamlit as st
 load_dotenv()
+
+groq_api_key = st.secrets.get("GROQ_API_KEY") or os.getenv("GROQ_API_KEY")
+os.environ["GROQ_API_KEY"] = groq_api_key
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def validate_files(files):
