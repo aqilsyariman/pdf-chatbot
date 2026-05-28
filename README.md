@@ -1,6 +1,6 @@
 # RAG Assistant
 
-A RAG (Retrieval-Augmented Generation) system that allows you to ask questions about any PDF document and get accurate AI-powered answers — with built-in hallucination prevention.
+A RAG (Retrieval-Augmented Generation) system that allows you to ask questions about any PDF document and get accurate AI-powered answers with built-in hallucination prevention.
 
 ## What It Does
 
